@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
+    <title>Compte à rebours</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #91167e, #fea303);
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden; /* Pour éviter les défilements dans l'iframe */
+        }
+
+        #timer {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.7em;
+            letter-spacing: 5px;
+            color: #f1e9db;
+        }
+
+        .days, .hours, .minutes, .seconds {
+            display: inline-block;
+            padding: 20px;
+            width: 100px;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 0 10px;
+        }
+
+        .days {
+            background: #2d415c;
+            color: #f1e9db;
+        }
+
+        .hours {
+            background: #fea303;
+            color: #2d415c;
+        }
+
+        .minutes {
+            background: #f1e9db;
+            color: #91167e;
+        }
+
+        .seconds {
+            background: #91167e;
+            color: #f1e9db;
+        }
+
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4em;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">
+        <div class="days">
+            <div id="days" class="numbers"></div>jours
+        </div>
+        <div class="hours">
+            <div id="hours" class="numbers"></div>heures
+        </div>
+        <div class="minutes">
+            <div id="minutes" class="numbers"></div>minutes
+        </div>
+        <div class="seconds">
+            <div id="seconds" class="numbers"></div>secondes
+        </div>
+    </div>
+    <script>
+        const myDate = new Date('Sep 28, 2024 00:00:00').getTime();
+
+        // countdown
+        let timer = setInterval(function() {
+            // get today's date
+            const today = new Date().getTime();
+
+            // get the difference
+            const diff = myDate - today;
+
+            // math
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // display
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        }, 1000);
+    </script>
+</body>
+</html>
